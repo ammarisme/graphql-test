@@ -1,0 +1,1 @@
+{"version":3,"file":"book.resolver.js","sourceRoot":"","sources":["../src/book.resolver.ts"],"names":[],"mappings":";;;;;;;;;;;;AAAA,6CAAkD;AAG3C,IAAM,aAAa,GAAnB,MAAM,aAAa;IAExB,KAAK;QACH,OAAO,CAAC,QAAQ,EAAE,QAAQ,CAAC,CAAC;IAC9B,CAAC;CACF,CAAA;AAJC;IAAC,IAAA,eAAK,EAAC,GAAG,EAAE,CAAC,CAAC,MAAM,CAAC,CAAC;;;;0CAGrB;AAJU,aAAa;IADzB,IAAA,kBAAQ,GAAE;GACE,aAAa,CAKzB;AALY,sCAAa"}
