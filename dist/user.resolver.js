@@ -17,17 +17,8 @@ let UserResolver = class UserResolver {
     constructor(userService) {
         this.userService = userService;
     }
-    async getallusers() {
-        console.log('getallusers');
-        const users = await this.userService.getallusers();
-        return users.map((user) => ({
-            id: user.id.S,
-            name: user.name.S,
-        }));
-    }
-    async getuser(id) {
-        console.log(id);
-        const users = await this.userService.getuser(id);
+    async users() {
+        const users = await this.userService.getusers();
         return users.map((user) => ({
             id: user.id.S,
             name: user.name.S,
@@ -39,13 +30,7 @@ __decorate([
     __metadata("design:type", Function),
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
-], UserResolver.prototype, "getallusers", null);
-__decorate([
-    (0, graphql_1.Query)((id) => [user_entity_1.User]),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Object]),
-    __metadata("design:returntype", Promise)
-], UserResolver.prototype, "getuser", null);
+], UserResolver.prototype, "users", null);
 UserResolver = __decorate([
     (0, graphql_1.Resolver)(),
     __metadata("design:paramtypes", [user_service_1.UserService])

@@ -11,10 +11,10 @@ const AWS = require("aws-sdk");
 const common_1 = require("@nestjs/common");
 const aws_sdk_1 = require("aws-sdk");
 const user_service_1 = require("./user.service");
+const user_resolver_1 = require("./user.resolver");
 const graphql_1 = require("@nestjs/graphql");
 const apollo_1 = require("@nestjs/apollo");
 const app_controller_1 = require("./app.controller");
-const user_resolver_1 = require("./user.resolver");
 let DynamoDBModule = class DynamoDBModule {
 };
 DynamoDBModule = __decorate([

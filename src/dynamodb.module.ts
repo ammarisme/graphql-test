@@ -3,11 +3,10 @@ import * as AWS from 'aws-sdk';
 import { Module } from '@nestjs/common';
 import { DynamoDB } from 'aws-sdk';
 import { UserService } from './user.service';
-//import { UserResolver } from './user.resolver';
+import { UserResolver } from './user.resolver';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { AppController } from './app.controller';
-import { UserResolver } from './user.resolver';
 
 
 @Module({
@@ -19,7 +18,7 @@ import { UserResolver } from './user.resolver';
     }),
   ],
   controllers: [AppController],
-  providers: [UserService, UserResolver, {// UserResolver,
+  providers: [UserService, UserResolver,{
     provide: DynamoDB,
     useFactory: () => {
       return new AWS.DynamoDB({

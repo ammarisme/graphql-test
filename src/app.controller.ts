@@ -5,15 +5,14 @@ import { UserService } from './user.service';
 export class AppController {
   constructor(private readonly appService: UserService) {}
 
-  @Get()
-  getallusers(): string {
-    console.log('getallusers')
-    return "Not permitted";
-  }
+//   @Get()
+//   getallusers(): string {
+//     console.log('getallusers')
+//     return "Not permitted";
+//   }
 
-  @Get('/users:id')
-  getuser(@Param('id') id: string): Promise<any> {
-    console.log(id)
-    return this.appService.getuser(id);
+  @Get()
+  getusers(): Promise<any> {
+    return this.appService.getusers();
   }
 }

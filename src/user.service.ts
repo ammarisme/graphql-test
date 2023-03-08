@@ -5,28 +5,12 @@ import { DynamoDB } from 'aws-sdk';
 export class UserService {
   constructor(@Inject(DynamoDB) private readonly dynamodb: DynamoDB) {}
 
-  async getallusers(): Promise<any[]> {
-    console.log('getallusers')
+  async getusers(): Promise<any[]> {
     const params = {
-      TableName: 'users'
+      TableName: 'users', // Replace with your DynamoDB table name
     };
 
-    const data = await this.dynamodb.query(params, (err, data) => {}).promise();
-
-    return data.Items;
-  }
-
-  async getuser(id): Promise<any[]> {
-    console.log(id)
-    const params = {
-      TableName: 'users',
-      KeyConditionExpression: 'id = :id',
-      ExpressionAttributeValues: {
-        ':id': id,
-      }
-    };
-
-    const data = await this.dynamodb.query(params, (err, data) => {}).promise();
+    const data = await this.dynamodb.scan(params).promise();
 
     return data.Items;
   }

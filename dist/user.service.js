@@ -19,24 +19,11 @@ let UserService = class UserService {
     constructor(dynamodb) {
         this.dynamodb = dynamodb;
     }
-    async getallusers() {
-        console.log('getallusers');
-        const params = {
-            TableName: 'users'
-        };
-        const data = await this.dynamodb.query(params, (err, data) => { }).promise();
-        return data.Items;
-    }
-    async getuser(id) {
-        console.log(id);
+    async getusers() {
         const params = {
             TableName: 'users',
-            KeyConditionExpression: 'id = :id',
-            ExpressionAttributeValues: {
-                ':id': id,
-            }
         };
-        const data = await this.dynamodb.query(params, (err, data) => { }).promise();
+        const data = await this.dynamodb.scan(params).promise();
         return data.Items;
     }
 };
