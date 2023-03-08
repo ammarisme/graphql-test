@@ -8,6 +8,9 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+var __param = (this && this.__param) || function (paramIndex, decorator) {
+    return function (target, key) { decorator(target, key, paramIndex); }
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserResolver = void 0;
 const graphql_1 = require("@nestjs/graphql");
@@ -24,6 +27,14 @@ let UserResolver = class UserResolver {
             name: user.name.S,
         }));
     }
+    async finduser(id) {
+        const user = await this.userService.finduser(id);
+        return user;
+    }
+    async createUser(name) {
+        const user = await this.userService.createuser(name);
+        return user;
+    }
 };
 __decorate([
     (0, graphql_1.Query)(() => [user_entity_1.User]),
@@ -31,6 +42,20 @@ __decorate([
     __metadata("design:paramtypes", []),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "users", null);
+__decorate([
+    (0, graphql_1.Query)(() => user_entity_1.User),
+    __param(0, (0, graphql_1.Args)('id')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "finduser", null);
+__decorate([
+    (0, graphql_1.Mutation)(returns => user_entity_1.User),
+    __param(0, (0, graphql_1.Args)('name')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "createUser", null);
 UserResolver = __decorate([
     (0, graphql_1.Resolver)(),
     __metadata("design:paramtypes", [user_service_1.UserService])

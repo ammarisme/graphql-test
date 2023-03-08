@@ -15,6 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.UserService = void 0;
 const common_1 = require("@nestjs/common");
 const aws_sdk_1 = require("aws-sdk");
+const crypto_1 = require("crypto");
 let UserService = class UserService {
     constructor(dynamodb) {
         this.dynamodb = dynamodb;
@@ -24,7 +25,43 @@ let UserService = class UserService {
             TableName: 'users',
         };
         const data = await this.dynamodb.scan(params).promise();
+        console.log('result sdsdsdsdsd');
         return data.Items;
+    }
+    async finduser(id) {
+        const params = {
+            TableName: 'users',
+            Key: {
+                id: {
+                    S: id,
+                },
+            },
+        };
+        const data = await this.dynamodb.getItem(params).promise();
+        return {
+            id: data.Item.id.S,
+            name: data.Item.name.S
+        };
+    }
+    async createuser(name) {
+        const user = {
+            id: { S: (0, crypto_1.randomUUID)() },
+            name: { S: name },
+        };
+        const params = {
+            TableName: 'users',
+            Item: user,
+        };
+        try {
+            const result = await this.dynamodb.putItem(params).promise();
+            return {
+                id: user.id.S,
+                name: user.name.S
+            };
+        }
+        catch (error) {
+            throw new Error(`Failed to create user: ${error}`);
+        }
     }
 };
 UserService = __decorate([

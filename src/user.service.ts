@@ -1,5 +1,9 @@
 import { Injectable, Inject } from '@nestjs/common';
-import { DynamoDB } from 'aws-sdk';
+import { Args } from '@nestjs/graphql';
+import AWS, { DynamoDB } from 'aws-sdk';
+import { PutItemInput } from 'aws-sdk/clients/dynamodb';
+import { randomUUID } from 'crypto';
+import { User } from './entities/user.entity';
 
 @Injectable()
 export class UserService {
@@ -12,6 +16,49 @@ export class UserService {
 
     const data = await this.dynamodb.scan(params).promise();
 
+    console.log('result sdsdsdsdsd')
+
     return data.Items;
   }
-}
+
+  async finduser(id): Promise<any> {
+
+    const params = {
+      TableName: 'users',
+      Key: {
+        id: {
+          S: id,
+        },
+      },
+
+    };
+    const data = await this.dynamodb.getItem(params).promise();
+
+    return {
+      id : data.Item.id.S,
+      name: data.Item.name.S
+    }
+  }
+
+  async createuser(name: string): Promise<any> {
+    const user = {
+      id: { S: randomUUID() },
+      name: { S: name },
+    }
+    const params :PutItemInput = {
+      TableName: 'users', // Replace with your table name
+      Item: user,
+    };
+
+    try {
+      const result =await this.dynamodb.putItem(params).promise();
+      return   {
+          id: user.id.S,
+          name: user.name.S
+        };
+    } catch (error) {
+      throw new Error(`Failed to create user: ${error}`);
+    }
+  }
+
+  }

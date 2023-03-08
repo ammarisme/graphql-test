@@ -1,9 +1,13 @@
-import { Resolver, Query } from '@nestjs/graphql';
+import { Resolver, Query, Args, Mutation } from '@nestjs/graphql';
+import { DynamoDB } from 'aws-sdk';
 import { User } from './entities/user.entity';
 import { UserService } from './user.service';
 
 @Resolver()
 export class UserResolver {
+
+  //constructor(private readonly dynamodb: DynamoDB) {}
+
   constructor(private readonly userService: UserService) {}
 
   @Query(() => [User])
@@ -14,5 +18,19 @@ export class UserResolver {
       id: user.id.S,
       name: user.name.S,
     }));
+    
+  }
+  
+
+  @Query(() => User)
+  async finduser(@Args('id') id: string) : Promise<any>{
+    const user = await this.userService.finduser(id);
+    return user
+  }
+
+  @Mutation(returns => User)
+  async createUser(@Args('name') name: string): Promise<String> {
+    const user = await this.userService.createuser(name);
+    return user;
   }
 }

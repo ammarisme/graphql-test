@@ -4,4 +4,6 @@ export declare class UserResolver {
     private readonly userService;
     constructor(userService: UserService);
     users(): Promise<User[]>;
+    finduser(id: string): Promise<any>;
+    createUser(name: string): Promise<String>;
 }
