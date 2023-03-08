@@ -1,12 +1,19 @@
-import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { Controller, Get, Param } from '@nestjs/common';
+import { UserService } from './user.service';
 
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
+  constructor(private readonly appService: UserService) {}
 
   @Get()
-  getHello(): string {
-    return this.appService.getHello();
+  getallusers(): string {
+    console.log('getallusers')
+    return "Not permitted";
+  }
+
+  @Get('/users:id')
+  getuser(@Param('id') id: string): Promise<any> {
+    console.log(id)
+    return this.appService.getuser(id);
   }
 }

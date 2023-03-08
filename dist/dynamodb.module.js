@@ -7,12 +7,14 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.DynamoDBModule = void 0;
-const apollo_1 = require("@nestjs/apollo");
-const common_1 = require("@nestjs/common");
-const graphql_1 = require("@nestjs/graphql");
 const AWS = require("aws-sdk");
+const common_1 = require("@nestjs/common");
 const aws_sdk_1 = require("aws-sdk");
-const app_service_1 = require("./app.service");
+const user_service_1 = require("./user.service");
+const graphql_1 = require("@nestjs/graphql");
+const apollo_1 = require("@nestjs/apollo");
+const app_controller_1 = require("./app.controller");
+const user_resolver_1 = require("./user.resolver");
 let DynamoDBModule = class DynamoDBModule {
 };
 DynamoDBModule = __decorate([
@@ -20,24 +22,21 @@ DynamoDBModule = __decorate([
         imports: [
             graphql_1.GraphQLModule.forRoot({
                 driver: apollo_1.ApolloDriver,
-                autoSchemaFile: true,
                 playground: true,
+                autoSchemaFile: true,
             }),
         ],
-        providers: [
-            app_service_1.AppService,
-            {
+        controllers: [app_controller_1.AppController],
+        providers: [user_service_1.UserService, user_resolver_1.UserResolver, {
                 provide: aws_sdk_1.DynamoDB,
                 useFactory: () => {
                     return new AWS.DynamoDB({
-                        region: 'us-west-2',
+                        region: 'us-east-2',
                         accessKeyId: 'AKIA5ABXD3YY4M4GUGWM',
                         secretAccessKey: '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'
                     });
                 },
-            },
-        ],
-        exports: [app_service_1.AppService, aws_sdk_1.DynamoDB],
+            }],
     })
 ], DynamoDBModule);
 exports.DynamoDBModule = DynamoDBModule;
