@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
 import { UserService } from './user.service';
 
 @Controller()
@@ -24,4 +24,10 @@ export class AppController {
     return this.appService.createuser(name);
     }
 
+    //graphql Put() method
+    @Put(':id')
+    updateuser(@Param('id') id: any, @Body() name: string): Promise<string> {
+    return this.appService.updateuser(id, name);
+    }
+    
 }

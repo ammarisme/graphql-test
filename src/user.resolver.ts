@@ -33,4 +33,11 @@ export class UserResolver {
     const user = await this.userService.createuser(name);
     return user;
   }
+
+  //Mutation to update user
+  @Mutation(returns => User)
+  async updateUser(@Args('id') id: string, @Args('name') name: string): Promise<String> {
+    const user = await this.userService.updateuser(id, name);
+    return user;
+  }
 }

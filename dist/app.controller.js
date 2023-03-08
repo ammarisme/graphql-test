@@ -28,6 +28,9 @@ let AppController = class AppController {
     createuser(name) {
         return this.appService.createuser(name);
     }
+    updateuser(id, name) {
+        return this.appService.updateuser(id, name);
+    }
 };
 __decorate([
     (0, common_1.Get)(),
@@ -49,6 +52,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], AppController.prototype, "createuser", null);
+__decorate([
+    (0, common_1.Put)(':id'),
+    __param(0, (0, common_1.Param)('id')),
+    __param(1, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object, String]),
+    __metadata("design:returntype", Promise)
+], AppController.prototype, "updateuser", null);
 AppController = __decorate([
     (0, common_1.Controller)(),
     __metadata("design:paramtypes", [user_service_1.UserService])

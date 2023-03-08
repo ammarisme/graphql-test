@@ -35,6 +35,10 @@ let UserResolver = class UserResolver {
         const user = await this.userService.createuser(name);
         return user;
     }
+    async updateUser(id, name) {
+        const user = await this.userService.updateuser(id, name);
+        return user;
+    }
 };
 __decorate([
     (0, graphql_1.Query)(() => [user_entity_1.User]),
@@ -56,6 +60,14 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], UserResolver.prototype, "createUser", null);
+__decorate([
+    (0, graphql_1.Mutation)(returns => user_entity_1.User),
+    __param(0, (0, graphql_1.Args)('id')),
+    __param(1, (0, graphql_1.Args)('name')),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [String, String]),
+    __metadata("design:returntype", Promise)
+], UserResolver.prototype, "updateUser", null);
 UserResolver = __decorate([
     (0, graphql_1.Resolver)(),
     __metadata("design:paramtypes", [user_service_1.UserService])

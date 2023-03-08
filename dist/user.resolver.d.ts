@@ -6,4 +6,5 @@ export declare class UserResolver {
     users(): Promise<User[]>;
     finduser(id: string): Promise<any>;
     createUser(name: string): Promise<String>;
+    updateUser(id: string, name: string): Promise<String>;
 }

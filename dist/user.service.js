@@ -63,6 +63,34 @@ let UserService = class UserService {
             throw new Error(`Failed to create user: ${error}`);
         }
     }
+    async updateuser(id, name) {
+        const params = {
+            TableName: 'users',
+            Key: {
+                id: {
+                    S: id,
+                },
+            },
+            UpdateExpression: 'set #name = :name',
+            ExpressionAttributeNames: {
+                '#name': 'name',
+            },
+            ExpressionAttributeValues: {
+                ':name': { S: name },
+            },
+            ReturnValues: 'UPDATED_NEW',
+        };
+        try {
+            const result = await this.dynamodb.updateItem(params).promise();
+            return {
+                id: id,
+                name: name,
+            };
+        }
+        catch (error) {
+            throw new Error(`Failed to update user: ${error}`);
+        }
+    }
 };
 UserService = __decorate([
     (0, common_1.Injectable)(),

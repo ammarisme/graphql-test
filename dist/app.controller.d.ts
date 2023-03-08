@@ -5,4 +5,5 @@ export declare class AppController {
     getusers(): Promise<any>;
     getuser(id: any): Promise<any>;
     createuser(name: string): Promise<string>;
+    updateuser(id: any, name: string): Promise<string>;
 }

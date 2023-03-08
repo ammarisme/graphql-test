@@ -5,4 +5,5 @@ export declare class UserService {
     getusers(): Promise<any[]>;
     finduser(id: any): Promise<any>;
     createuser(name: string): Promise<any>;
+    updateuser(id: string, name: string): Promise<any>;
 }
