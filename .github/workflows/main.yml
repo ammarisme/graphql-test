@@ -18,7 +18,7 @@ jobs:
       - name: Package
         run: zip -r app.zip dist
       - name: Deploy
-        uses: einaregilsson/aws-lambda-deploy@v1
+        uses: aws-actions/configure-aws-credentials@v1
         with:
           function-name: my-lambda-function
           zip-file: app.zip
